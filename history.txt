@@ -1,0 +1,24 @@
+  106  cd /mnt/scratch-lustre/student7
+  107  mkdir CTA200_2024
+  108  mkdir -p CTA200_2024/assignment_1
+  109  touch README.md
+  112  vi README.md
+  115  cd /home/murray
+  116  ls
+  121  cp /home/murray/Hello_world.c /mnt/scratch-lustre/student7/CTA200_2024/assignment_1
+  122  cp /home/murray/Hello_world.py /mnt/scratch-lustre/CTA200_2024/student7/assignment_1
+  127  mv Hello_world.c Hello_world_munawwarah.c
+  129  mv Hello_world.py Hello_world_munawwarah.py
+  131  gcc Hello_world_munawwarah.c -o Hello_world.x
+  135  module load python
+  144  ./Hello_world.x
+  145  python Hello_world_munawwarah.py
+  146  vi Hello_world_munawwarah.c
+  148  vi Hello_world_munawwarah.py
+  149  python Hello_world_munawwarah.py
+  151  gcc Hello_world_munawwarah.c -o Hello_world.x
+  152  ./Hellow_world.x
+  156  ./Hello_world.x > output_c.txt
+  163  python Hello_world_munawwarah.py > output_python.txt
+  164  cd /mnt/scratch-lustre/student7
+  165  mv README.md CTA200_2024
