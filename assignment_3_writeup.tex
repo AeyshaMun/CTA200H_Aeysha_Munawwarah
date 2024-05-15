@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{wrapfig}
+
+\title{Assignment 3 Writeup}
+\author{Aeysha Munawwarah}
+\date{May 14 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Question 1}
+
+\begin{figure}[h]
+\caption{\textit{An image of points in the complex plane $c = x + iy$ such that 
+$-2 < x < 2$ and $-2 < y < 2$. The points are colour-coded, with bounded points in blue and divergent points in red.}}
+\centering
+\includegraphics[width=0.8\textwidth]{mandelbrot.pdf}
+\end{figure}
+
+For this question, I first wrote the function \texttt{mandelbrot}, which would determine whether a given complex number, c, was contained in the Mandelbrot set, i.e. whether or not the equation $z_{i+1} = z_{i}^2 + c$ diverged when iterated from $z_{0} = 0$.
+
+Then, I created a list containing all of the points in the complex plane $c = x + iy$ with $-2 < x < 2$ and $-2 < y < 2$. Afterward, I looped through each of these points, and depending on the return value of \texttt{mandelbrot(c)}, 
+I added the point to a list of all the bounded points (\texttt{mandelbrot(c)} = \texttt{max\_iter} = 100) or a list of all the divergent points (\texttt{mandelbrot(c)} $<$ \texttt{max\_iter} = 100).
+
+Then, I plotted an image (see Figure 1) of all the points in the complex plane, where all of the bounded points were coloured blue and all of the divergent points were coloured red.
+
+\begin{figure}[h]
+\caption{\textit{An image of points in the complex plane $c = x + iy$ such that 
+$-2 < x < 2$ and $-2 < y < 2$. The points are coloured by a colourscale that indicates the iteration number at which the given point diverged.}}
+\centering
+\includegraphics[width=0.8\textwidth]{mandelbrot_colourscale.pdf}
+\end{figure}
+
+Finally, I plotted an image in a colourscale (see Figure 2) where the colour of each point indicates the iteration number at which that point diverged. For bounded points, the iteration number would be 100, as the loop would have finished without returning early.
+
+\section{Question 2}
+
+For this question, I first wrote the function \texttt{lorenz\_equations,} which defined the three Lorenz equations given by: 
+\begin{eqnarray}
+\dot X &=& -\sigma(X-Y)\\
+\dot Y &=& rX -Y - XZ\\
+\dot Z &=& -bZ + XY
+\end{eqnarray}
+
+Then, I used scipy's \texttt{solve\_ivp} to integrate the equations from $t = 0$ to $t = 60$. I used Lorenz' initial conditions $W_{0} = [0.0, 1.0, 0.0]$ as well as his parameter values $[\sigma, r, b] = [10.0, 28.0, 8.0/3.0]$. I then stored the solution at t = 60 in the variable \texttt{w\_t\_60}.
+
+\begin{figure}[h]
+\caption{\textit{A reproduction of Figure 1 from Lorenz' paper: a plot of Y as a function of time for the first 1000 iterations (uppermost graph), the second 1000 iterations (middle graph), and third 1000 iterations (lowermost graph).}}
+\centering
+\includegraphics[width=0.8\textwidth]{lorenz_fig_1.pdf}
+\end{figure}
+
+For the third part, I reproduced Figure 1 from Lorenz' paper on deterministic nonperiodic flow (see Figure 3). I integrated the equations from $t = 0$ to $t = 30$, and used the equation $N = t/\Delta t$ to get the number of iterations (N) associated with each t during this time interval. Here, $\Delta t = 0.01$. Then I plotted Y as a function of time, splitting the graph into three intervals of 1000 iterations.
+
+\begin{figure}[h]
+\caption{\textit{A reproduction of Figure 2 from Lorenz' paper: a plot of projections onto the XY (left graph) and YZ (right graph) planes in phase space of the segment of the trajectory extending from iteration 1400 to iteration 1900.}}
+\centering
+\includegraphics[width=0.9\textwidth]{lorenz_fig_2.pdf}
+\end{figure}
+
+For the fourth part, I reproduced Figure 2 from Lorenz' paper (see Figure 4). I integrated the equations from $t = 0$ to $t = 60$ and then extracted the segment of the trajectory from iteration 1400 to 1900 before plotting the projections onto the XY and YZ planes.
+
+\begin{figure}[h]
+\caption{\textit{A semilog plot of the distance between $W'$ and $W$ as a function of time.}}
+\centering
+\includegraphics[width=0.8\textwidth]{distance.pdf}
+\end{figure}
+
+Finally, for the fifth part, I found the solution to the system of equations by using the same values of $(\sigma, r, b)$, but this time with initial conditions very slightly different than $W_0$: $W'_0 = W_0 + [0., 1.e-8, 0] = [0.0, 1.00000001, 0.0]$. I integrated the equations twice from $t = 0$ to $t = 60$, first using $W_0$ and then using $W'_0$. I then calculated the distance between $W'$ and $W$ as a function of time, and plotted the result on a semilog plot (linear time, log distance; see Figure 5). 
+
+\end{document}
